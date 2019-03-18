@@ -1,14 +1,12 @@
-const users = [
-    {
-        username: 'somebody0',
-        password: 'somebodyPassword0'
-    },
-    {
-        username: 'somebody1',
-        password: 'somebodyPassword1'
-    },
-];
+const Sequelize = require('sequelize');
+const UserModel = require('../models/users');
+const sequelize = require('../database/connection');
+
+const User = UserModel(sequelize, Sequelize);
 
 module.exports.getUsers = (req, res) => {
-    res.send(users)
+    User.
+        findAll()
+        .then(data => res.json(data))
+        .catch(err => console.log(err))
 };

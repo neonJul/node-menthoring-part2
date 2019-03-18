@@ -1,3 +1,23 @@
 {
-  "secretKey": "secretKey"
+  "development": {
+    "username": "postgres",
+    "password": "password2019",
+    "database": "nodeMenthoring",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "password2019",
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "password2019",
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
 }

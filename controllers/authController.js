@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const config = require('../config/config');
+// const config = require('../config/config');
 const success = {
     code: 200,
     message: "OK",
@@ -31,7 +31,8 @@ const hardcodedUsers = [
 module.exports.authentication = (req, res) => {
     const user = hardcodedUsers.find(user => user.username === req.body.username && user.password === req.body.password);
     if (user) {
-        success.token = jwt.sign({ user }, config.secretKey);
+        success.token = jwt.sign({ user }, "secretKey");
+        // success.token = jwt.sign({ user }, config.secretKey);
         res.send(success);
     } else {
         res.send(error);

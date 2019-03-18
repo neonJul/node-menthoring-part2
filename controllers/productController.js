@@ -1,23 +1,47 @@
-const products = [
-    {
-        product: 'Apple',
-        reviews: ['1', '2', '3']
-    },
-];
+const Sequelize = require('sequelize');
+const ProductModel = require('../models/products');
+const sequelize = require('../database/connection');
+
+const Product = ProductModel(sequelize, Sequelize);
 
 module.exports.getProducts = (req, res) => {
-    res.send(products);
+    Product.
+        findAll()
+        .then(data => res.json(data))
+        .catch(err => console.log(err))
 };
 
 module.exports.getProductByID = (req, res) => {
-    res.send(products[req.params.id] ? products[req.params.id] : "There is no product with such id");
+    Product
+        .findById(req.params.id)
+        .then(data => data
+            ? res.json(data)
+            : res
+                .status(404)
+                .json({message: 'Product not found.'})
+        )
+        .catch(err => console.log(err))
 };
 
 module.exports.getProductReviews = (req, res) => {
-    res.send(products[req.params.id] ? products[req.params.id].reviews : "There is no product with such id");
+    Product
+        .findById(req.params.id)
+        .then(data => data
+            ? res.json(data.review)
+            : res
+                .status(404)
+                .json({message: 'Product not found.'})
+        )
+        .catch(err => console.log(err))
 };
 
 module.exports.postProduct = (req, res) => {
-    products.push({ product: req.body.product });
-    res.send(products[products.length - 1]);
+    const newProduct = {
+        product: req.body.product
+    };
+
+    Product
+        .create(newProduct)
+        .then(created => res.json(created))
+        .catch(error => res.send(error));
 };
