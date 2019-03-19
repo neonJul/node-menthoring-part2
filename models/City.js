@@ -5,10 +5,10 @@ const City = new Schema({
     name: String,
     country: String,
     capital: Boolean,
-    location : [{
+    location : {
         lat: Number,
         long: Number
-    }],
+    },
     lastModifiedDate: Date
 });
 

@@ -15,12 +15,10 @@ module.exports.postCity = (req, res) => {
         name: req.body.name,
         country: req.body.country,
         capital: req.body.capital,
-        location: [
-            {
-                lat: req.body.lat,
-                long: req.body.long
-            }
-        ],
+        location: {
+            lat: req.body.location.lat,
+            long: req.body.location.long
+        },
         lastModifiedDate: new Date()
     });
     city.save((err, city) => {
